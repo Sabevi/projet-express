@@ -9,8 +9,6 @@ export class UserRouter {
     }
 
     private configureRoutes(): void {
-        // on indique au router que pour toute requête "user/id" ici, on execute ça
-        //next: next middleware
         this.router.get('/:id', (req, res, next) => {
             try {
                 const result = this.userController.getById(
