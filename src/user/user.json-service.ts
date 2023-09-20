@@ -1,7 +1,6 @@
 import { User } from './user';
 import { UserService } from './user.service';
 import fs from 'fs';
-import path from 'path';
 
 export class UserJSONService implements UserService {
     private filePath: string = './src/bd/bd.json';
@@ -23,7 +22,6 @@ export class UserJSONService implements UserService {
         };
         users.push(newUser);
         fs.writeFileSync(this.filePath, JSON.stringify(users));
-        
         return users[users.length - 1];
     }
 
