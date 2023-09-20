@@ -3,7 +3,7 @@ import { UserService } from './user.service';
 import fs from 'fs';
 
 export class UserJSONService implements UserService {
-    private filePath: string = './src/bd/bd.json';
+    private filePath: string = './src/database/users.json';
 
     private readJSONFile(): User [] {
         try {
