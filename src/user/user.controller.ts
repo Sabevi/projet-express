@@ -18,7 +18,7 @@ export class UserController {
         // is the id a decimal ?
         if(!Number.isInteger(id)) {
             throw new Error('Id is not an integer');
-        }
+        } 
         // is the id a negative number ?
         // other checks...
         return this.userService.getById(id);
