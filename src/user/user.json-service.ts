@@ -16,12 +16,12 @@ export class UserJSONService implements UserService {
     add(username: string): User{
         const users: User[] = this.readJSONFile();
         const newUser = {
-            id: Math.floor(Math.random() * 100),
+            id: Math.floor(Math.random() * 10000),
             username: username 
         };
         users.push(newUser);
         fs.writeFileSync(this.filePath, JSON.stringify(users));
-        return users[users.length - 1];
+        return newUser;
     }
 
     getById(id: number): User | null {
