@@ -2,12 +2,10 @@ import fs from 'fs';
 import { UserJSONService } from './user.json-service';
 import { User } from './user';
 
-// Mock du module fs
 jest.mock('fs');
 const fsMock = fs as jest.Mocked<typeof fs>;
 
 describe('UserJSONService', () => {
-    // System Under Test
     let sut: UserJSONService;
 
     beforeEach(() => {
@@ -15,12 +13,17 @@ describe('UserJSONService', () => {
         jest.resetAllMocks();
     });
 
-    describe('add', () => {
-        it('should add a user', () => {
-            const name = 'testUser';
-            const newUser = sut.add(name);
-            expect(newUser.username).toBe(name);
-        });
+    describe('add', () => {        
+        it('should throw an error if the username already exists', () => {
+            const readJSONFileSpy = jest.spyOn(sut as any, 'readJSONFile').mockReturnValueOnce([{ id: 1001, username: 'polo' }]);
+            const existingUsername = 'polo';
+
+            expect(() => {
+              sut.add(existingUsername);
+            }).toThrow('User already exists');
+
+            expect(readJSONFileSpy).toHaveBeenCalled();
+          });
     });
 
     describe('getById', () => {

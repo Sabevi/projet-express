@@ -15,6 +15,9 @@ export class UserJSONService implements UserService {
 
     add(username: string): User{
         const users: User[] = this.readJSONFile();
+        if(users.find(user => user.username === username)){
+            throw new Error('User already exists');
+        }
         const newUser = {
             id: Math.floor(Math.random() * 10000),
             username: username 
@@ -28,6 +31,5 @@ export class UserJSONService implements UserService {
         const users: User[] = this.readJSONFile();
         const user = users.find(user => user.id === id);
         return user || null;
-        
     }
 }
