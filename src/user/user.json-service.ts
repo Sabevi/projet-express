@@ -6,12 +6,11 @@ export class UserJSONService implements UserService {
     private filePath: string = './src/database/users.json';
 
     private readJSONFile(): User [] {
-        try {
-            const data = fs.readFileSync(this.filePath, 'utf8');
-            return JSON.parse(data) as User [];
-        } catch (error) {
+        const data = fs.readFileSync(this.filePath, 'utf8');
+        if (!data || data.length === 0) {
             return [];
         }
+        return JSON.parse(data) as User [];
     }
 
     add(username: string): User{
